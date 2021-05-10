@@ -67,3 +67,28 @@ void print_stack (Tstack *s) {
   // Ao final do while, temos a pilha s repopulada na ordem correta com os seus elementos impressos e a pilha t vazia
   clear (t);
 }
+
+void copy_stack (Tstack *s1, Tstack *s2) {
+  if (empty (s1)) {
+    exit (1);
+  }
+
+  if (!empty (s2)) {
+    exit (1);
+  }
+
+  Tstack *aux = create();
+  int elem;
+
+  while (!empty (s1)) {
+    push (aux, pop (s1));
+  }
+
+  while (!empty (aux)) {
+    elem = pop (aux);
+    push (s1, elem);
+    push (s2, elem);
+  }
+
+  clear (aux);
+}
