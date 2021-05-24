@@ -92,3 +92,27 @@ void copy_stack (Tstack *s1, Tstack *s2) {
 
   clear (aux);
 }
+
+void separate_stacks (Tstack *s, Tstack *s_pairs, Tstack *s_odds) {
+  Tstack *aux = create();
+  int elem;
+
+  while (!empty(s)) {
+    push (aux, pop (s));
+  }
+  // ao fim deste while, a pilha s estará vazia e a aux estará com todos os elementos em ordem inversa
+
+  while (!empty (aux)) {
+    elem = pop (aux);
+    push (s, elem);
+    if (elem % 2 == 0) {
+      push (s_pairs, elem);
+    }
+    else {
+      push (s_odds, elem);
+    }
+  }
+  // ai fim do while, a pilha s está como antes, a s_odds com os ímpares, a s_pairs com os pares e a aux está vazia
+
+  clear (aux);
+}

@@ -58,10 +58,13 @@ void clear (Tlist *l) {
   }
 }
 
+// Tlist *search (Tlist *l, int elem);
+
+// Tlist *remove (Tlist *l, int elem);
+
+
 
 // Tlist *start_insert (Tlist *l, int elem);
 // Tlist *end_insert (Tlist *l, int elem);
 // Tlist *start_remove (Tlist *l);
 // Tlist *end_remove (Tlist *l);
-// Tlist *remove (Tlist *l, int elem);
-// Tlist *search (Tlist *l, int elem);
