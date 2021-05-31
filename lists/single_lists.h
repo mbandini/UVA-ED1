@@ -1,5 +1,9 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <time.h>
+
+#define NUM_ELEMENTS 10
+#define SEARCH_ELEMENTS 3
 
 typedef struct list {
   int info;
@@ -58,11 +62,83 @@ void clear (Tlist *l) {
   }
 }
 
-// Tlist *search (Tlist *l, int elem);
+// Busca linear (não recursiva) por um elemento na lista
+Tlist *search (Tlist *l, int elem) {
+  Tlist *p = l; // ponteiro auxiliar apontando para a cabeça da lista
 
-// Tlist *remove (Tlist *l, int elem);
+  while (p) { // enquanto tivermos elementos na lista
+    if (p->info != elem) {
+      p = p->next; // se o elemento atual for diferente daquele buscado, anda para o próximo
+    }
+    else {
+      return p; // retorna o elemento da lista assim que ele é encontrado
+    }
+  }
 
+  return p; // só será executado se o elemento não estiver na lista
+}
 
+// Remover um determinado elemento da lista
+Tlist *remove_elem (Tlist *l, int elem) {
+  Tlist *previous = NULL, *p = l;
+
+  while ((p != NULL)  && (p->info != elem)) { // andando na lista até ela acabar ou até encontrar o elemento
+    previous = p;
+    p = p->next;
+  }
+
+  if (!p) { // p aponta para NULL, ou seja, o fim da lista foi alcançado
+    printf ("O elemento %d não está na lista\n", elem);
+    return l; // retorno a própria lista original sem remover nenhum elemento
+  }
+
+  if (!previous) { // significa que o elemento a ser removido foi encontrado na primeira posição da lista
+    l = l->next; // cabeça da lista apronta para o segund elemento
+  }
+  else {
+    previous->next = p->next; // o anterior aponta para o elemento seguinte ao elemento p
+  }
+
+  printf ("Elemento %d removido da lista\n", p->info);
+  free (p);
+  return l;
+}
+
+// Exercício 1
+void random_draw () {
+  Tlist *list = create (), *found = create();
+  int i, r;
+  time_t t;
+
+  // Inicializar o gerador de números pseudo-aleatório
+  srand((unsigned) time(&t));
+
+  for (i = 1; i <= NUM_ELEMENTS; i++) {
+    list = ordered_insert (list, rand () % 20);
+  }
+
+  printf ("Lista criada com os seguintes elementos:\n");
+  print_list (list);
+  printf ("\n++++++++++++++++++++++++++++++++++++++++++++\n");
+
+  i = 1;
+  do {
+    r = rand () % 20;
+    found = search (list, r);
+    if (found) {
+      printf ("Valor %d encontrado na lista\n", found->info);
+      found = remove_elem (found, found->info);
+      i++;
+    }
+    else {
+      printf ("Valor %d não encontrado na lista\n", r);
+    }
+  } while (i <= SEARCH_ELEMENTS);
+  printf ("\nPROGRAMA ENCERRADO\n");
+
+  clear (found);
+  clear (list);
+}
 
 // Tlist *start_insert (Tlist *l, int elem);
 // Tlist *end_insert (Tlist *l, int elem);
