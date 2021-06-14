@@ -21,16 +21,17 @@ int main () {
   //   printf ("Elemento não encontrado\n");
   // }
 
-  print_circular (circular);
+  // print_circular (circular);
 
-  circular = remove_circular (circular, 10);
+  // circular = remove_circular (circular, 10);
 
-  printf ("+++++++++++++++++++++++++++++++++++\n");
-  print_circular (circular);
-  circular = remove_circular (circular, 10);
+  // printf ("+++++++++++++++++++++++++++++++++++\n");
+  // print_circular (circular);
+  // circular = remove_circular (circular, 10);
 
-  clear_circular (circular);
+  // clear_circular (circular);
 
+  print_2_laps (circular);
 
   return 0;
 }

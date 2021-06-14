@@ -80,7 +80,8 @@ Tlist *search (Tlist *l, int elem) {
 
 // Remover um determinado elemento da lista
 Tlist *remove_elem (Tlist *l, int elem) {
-  Tlist *previous = NULL, *p = l;
+  // Tlist *previous = NULL, *p = l;
+  Tlist *previous = l, *p = l->next;
 
   while ((p != NULL)  && (p->info != elem)) { // andando na lista até ela acabar ou até encontrar o elemento
     previous = p;
@@ -106,7 +107,7 @@ Tlist *remove_elem (Tlist *l, int elem) {
 
 // Exercício 1
 void random_draw () {
-  Tlist *list = create (), *found = create();
+  Tlist *list = create (), *found = NULL;
   int i, r;
   time_t t;
 
@@ -127,7 +128,8 @@ void random_draw () {
     found = search (list, r);
     if (found) {
       printf ("Valor %d encontrado na lista\n", found->info);
-      found = remove_elem (found, found->info);
+      remove_elem (list, found->info);
+      found = NULL;
       i++;
     }
     else {

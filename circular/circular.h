@@ -12,8 +12,6 @@ Tcl *create_circular () {
   return NULL;
 }
 
-
-
 // Inserir um novo elemento na lista circular no início da lista
 Tcl *insert_circular (Tcl *l, int elem) {
   Tcl *new_elem = (Tcl *) malloc (sizeof (Tcl));
@@ -95,8 +93,8 @@ Tcl *remove_circular (Tcl *l, int elem) {
     p = p->next;
   }
 
-  if (p == l && p->info != elem) { // voltamos ao início da lista e na encontramos o elemento
-    printf ("Elemento a ser removido nao encontrado\n");
+  if (p == l && p->info != elem) { // voltamos ao início da lista e não encontramos o elemento
+    printf ("Elemento a ser removido não encontrado\n");
     return l;
   }
 
@@ -108,4 +106,19 @@ Tcl *remove_circular (Tcl *l, int elem) {
   printf ("Elemento %d removido\n", p->info);
   free (p);
   return l;
+}
+
+// Dar duas voltas em uma lista circular
+void print_2_laps (Tcl *l) {
+  Tcl *p = l->next;
+  int laps = 1;
+
+  while (laps <= 2) {
+    printf ("> %d\n", p->info);
+    p = p->next;
+    if (p == l->next) {
+      printf (">>>>>>>>>> VOLTA %d COMPLETADA\n", laps);
+      laps++;
+    }
+  }
 }
