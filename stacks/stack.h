@@ -1,4 +1,5 @@
 #include <stdlib.h>
+#include <stdio.h>
 
 typedef struct node {
   int info;
@@ -51,18 +52,19 @@ void clear (Tstack *s) {
 
 void print_stack (Tstack *s) {
   Tstack *t = create();
-  int elem, counter = 1;
+  int elem1, elem2, counter = 1;
 
   while (!empty (s)) {
-    push (t, pop (s));
-  }
-  // Ao fim do while, temos uma cópia invertida da pilha s na pilha t
-
-  while (!empty (t)) {
-    elem = pop (t);
-    printf ("Elemento %d da pilha = %d\n", counter, elem);
-    push (s, elem);
+    elem1 = pop (s);
+    printf ("Elemento %d da pilha = %d\n", counter, elem1);
+    push (t, elem1);
     counter ++;
+  }
+  
+  // Ao fim do while, temos uma cópia invertida da pilha s na pilha t
+  while (!empty (t)) {
+    elem2 = pop (t);
+    push (s, elem2);
   }
   // Ao final do while, temos a pilha s repopulada na ordem correta com os seus elementos impressos e a pilha t vazia
   clear (t);
